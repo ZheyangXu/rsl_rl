@@ -5,14 +5,16 @@
 
 """Building blocks for neural models."""
 
-from .cnn import CNN
-from .distribution import BetaDistribution, Distribution, GaussianDistribution, HeteroscedasticGaussianDistribution
-from .mlp import MLP
-from .normalization import EmpiricalDiscountedVariationNormalization, EmpiricalNormalization
-from .rnn import RNN, HiddenState
+from rsl_rl.modules.cnn import CNN
+from rsl_rl.modules.discriminator import Discriminator
+from rsl_rl.modules.distribution import BetaDistribution, Distribution, GaussianDistribution, HeteroscedasticGaussianDistribution
+from rsl_rl.modules.mlp import MLP
+from rsl_rl.modules.normalization import EmpiricalDiscountedVariationNormalization, EmpiricalNormalization
+from rsl_rl.modules.rnn import RNN, HiddenState
 
 __all__ = [
     "CNN",
+    "Discriminator",
     "MLP",
     "RNN",
     "BetaDistribution",
