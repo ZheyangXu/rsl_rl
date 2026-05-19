@@ -5,7 +5,8 @@
 
 """Helper functions."""
 
-from .utils import (
+from rsl_rl.utils.motion_loader import AmpLoader, MotionData
+from rsl_rl.utils.utils import (
     check_nan,
     compile_model,
     get_param,
@@ -18,6 +19,8 @@ from .utils import (
 )
 
 __all__ = [
+    "AmpLoader",
+    "MotionData",
     "check_nan",
     "compile_model",
     "get_param",
