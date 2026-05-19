@@ -5,8 +5,9 @@
 
 from __future__ import annotations
 
-import torch
 from typing import Generator, Tuple
+
+import torch
 
 
 class ReplayBuffer:

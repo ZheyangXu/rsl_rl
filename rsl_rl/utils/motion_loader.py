@@ -5,14 +5,14 @@
 
 from __future__ import annotations
 
-from pathlib import Path
-from typing import Generator, List, Tuple, Union, Dict
 from dataclasses import dataclass
+from pathlib import Path
+from typing import Dict, Generator, List, Tuple, Union
 
-import torch
 import numpy as np
-from scipy.spatial.transform import Rotation, Slerp
+import torch
 from scipy.interpolate import interp1d
+from scipy.spatial.transform import Rotation, Slerp
 
 
 @dataclass

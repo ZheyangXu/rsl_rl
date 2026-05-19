@@ -5,11 +5,12 @@
 
 from __future__ import annotations
 
+from typing import Tuple
+
 import torch
 import torch.nn as nn
 from torch import autograd
 from torch.nn import functional as F
-from typing import Tuple
 
 from rsl_rl.modules.normalization import EmpiricalNormalization
 
@@ -213,10 +214,6 @@ class Discriminator(nn.Module):
         with torch.no_grad():
             for batch in batches:
                 self.amp_normalizer.update(batch)
-
-    # ------------------------------------------------------------------
-    # Internal helpers
-    # ------------------------------------------------------------------
 
     def _compute_grad_pen(
         self,

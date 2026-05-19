@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import os
 import time
+
 import torch
 from tensordict import TensorDict
 
@@ -176,10 +177,6 @@ class AmpOnPolicyRunner:
         )
         self.current_learning_iteration = 0
 
-    # ------------------------------------------------------------------
-    # Training loop
-    # ------------------------------------------------------------------
-
     def learn(self, num_learning_iterations: int, init_at_random_ep_len: bool = False) -> None:
         """Run the AMP+PPO learning loop.
 
@@ -296,10 +293,6 @@ class AmpOnPolicyRunner:
             )
             self.logger.stop_logging_writer()
 
-    # ------------------------------------------------------------------
-    # Save / Load
-    # ------------------------------------------------------------------
-
     def save(self, path: str, infos: dict | None = None) -> None:
         """Save models and training state."""
         saved_dict = {
@@ -349,10 +342,6 @@ class AmpOnPolicyRunner:
     def add_git_repo_to_log(self, repo_file_path: str) -> None:
         """Register a repository whose git status should be logged."""
         self.logger.git_status_repos.append(repo_file_path)
-
-    # ------------------------------------------------------------------
-    # Helpers
-    # ------------------------------------------------------------------
 
     @staticmethod
     def _flatten_amp_obs(amp_obs: TensorDict | dict | torch.Tensor) -> torch.Tensor:

@@ -9,7 +9,6 @@ from typing import Tuple
 
 import torch
 import torch.nn as nn
-from itertools import chain
 from tensordict import TensorDict
 
 from rsl_rl.models import MLPModel
@@ -123,10 +122,6 @@ class AmpPPO:
         self.schedule = schedule
         self.learning_rate = learning_rate
 
-    # ------------------------------------------------------------------
-    # Rollout
-    # ------------------------------------------------------------------
-
     def act(self, obs: TensorDict) -> torch.Tensor:
         """Sample actions and store transition data.
 
@@ -231,10 +226,6 @@ class AmpPPO:
             st.advantages.std() + 1e-8
         )
 
-    # ------------------------------------------------------------------
-    # Update
-    # ------------------------------------------------------------------
-
     def update(self) -> Tuple[float, float, float, float, float, float, float, float, float]:
         """Perform PPO + AMP discriminator update over stored batches.
 
@@ -294,8 +285,6 @@ class AmpPPO:
             returns_batch = batch.returns
             old_actions_log_prob_batch = batch.old_actions_log_prob
             old_distribution_params = batch.old_distribution_params
-            old_mu_batch = old_distribution_params[0]
-            old_sigma_batch = old_distribution_params[1]
             hidden_states_batch = batch.hidden_states
             masks_batch = batch.masks
 
@@ -317,8 +306,6 @@ class AmpPPO:
                 hidden_state=hidden_critic,
             )
             dist_params = self.actor.output_distribution_params
-            mu_batch = dist_params[0]
-            sigma_batch = dist_params[1]
             entropy_batch = self.actor.output_entropy
 
             # --- Adaptive learning rate ---
@@ -456,10 +443,6 @@ class AmpPPO:
             mean_accuracy_expert,
             mean_kl_divergence,
         )
-
-    # ------------------------------------------------------------------
-    # Mode switching
-    # ------------------------------------------------------------------
 
     def train_mode(self) -> None:
         """Set models to training mode."""
